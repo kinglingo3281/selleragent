@@ -1,0 +1,108 @@
+{
+  "jobs": [
+    {
+      "name": "hyperliquid_trade_signal",
+      "description": "Returns a directional trade view for a single Hyperliquid perp. Output covers bias (LONG/SHORT/MIXED), suggested entry zone, stop-loss, take-profit targets, nearby liquidation clusters, and a short AI-written reasoning section grounded in local tracker data.",
+      "requiredFunds": false,
+      "slaMinutes": 2,
+      "requirement": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Trading symbol (e.g., BTC, ETH, SOL, DOGE)",
+            "examples": ["BTC", "ETH", "SOL", "DOGE", "AVAX"]
+          }
+        },
+        "required": ["symbol"]
+      },
+      "deliverable": "Full trade setup with direction, levels, and reasoning",
+      "price": { "type": "fixed", "value": 0.25 }
+    },
+    {
+      "name": "best_trade_signals",
+      "description": "Scans every monitored Hyperliquid perp and surfaces the strongest 1-2 opportunities. Candidates are scored by a composite of smart-money flow, positioning skew, proximity to liquidation pockets, and recent volatility. Each pick includes a complete setup with levels and reasoning.",
+      "requiredFunds": false,
+      "slaMinutes": 3,
+      "requirement": {
+        "type": "object",
+        "properties": {
+          "max_signals": {
+            "type": "number",
+            "description": "Maximum number of signals to return (1 or 2)",
+            "default": 2
+          }
+        },
+        "required": []
+      },
+      "deliverable": "Formatted trade signals with full setups",
+      "price": { "type": "fixed", "value": 0.25 }
+    },
+    {
+      "name": "alpha_dashboard",
+      "description": "Produces a plain-English market snapshot covering Hyperliquid perps. Includes a short summary, overall bias call (LONG/SHORT/NEUTRAL with conviction), the main catalysts driving the read, items to monitor for a regime change, and a ranked list of the most bullish and bearish tickers.",
+      "requiredFunds": false,
+      "slaMinutes": 2,
+      "requirement": {
+        "type": "object",
+        "properties": {
+          "focus": {
+            "type": "string",
+            "description": "Optional focus area (e.g., 'ETH', 'memecoins', 'funding rates')",
+            "default": ""
+          }
+        },
+        "required": []
+      },
+      "deliverable": "Market overview with bias and analysis",
+      "price": { "type": "fixed", "value": 0.5 }
+    }
+  ],
+  "resources": [
+    {
+      "name": "get_supported_perp_trading_token_list",
+      "description": "Enumerates every Hyperliquid perp symbol the agent currently monitors. Only symbols with active local tracker data are included. Response contains symbol name, tradability flag, max leverage, and a timestamp.",
+      "url": "https://YOUR_RESOURCE_DOMAIN/resources/get_supported_perp_trading_token_list",
+      "params": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "is_symbol_supported",
+      "description": "Checks whether a given symbol has local tracker data and exists on the Hyperliquid exchange. Accepts the bare ticker or the -PERP suffixed form. Returns availability status, leverage info, and a reason code when unsupported.",
+      "url": "https://YOUR_RESOURCE_DOMAIN/resources/is_symbol_supported",
+      "params": {
+        "type": "object",
+        "properties": {
+          "symbol": {
+            "type": "string",
+            "description": "Perpetual trading symbol, e.g. ETH-PERP or ETH"
+          }
+        },
+        "required": ["symbol"]
+      }
+    },
+    {
+      "name": "get_agent_status",
+      "description": "Reports the agent's current workload and remaining capacity (concurrency slots, active jobs, last-updated timestamp).",
+      "url": "https://YOUR_RESOURCE_DOMAIN/resources/agent_status",
+      "params": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "get_alpha_context_status",
+      "description": "Returns the age and health of the most recent market-context snapshot used by the dashboard service. Useful for checking whether the data pipeline is current before purchasing.",
+      "url": "https://YOUR_RESOURCE_DOMAIN/resources/alpha_context_status",
+      "params": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  ]
+}

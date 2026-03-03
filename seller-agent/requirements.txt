@@ -1,0 +1,4 @@
+virtuals-acp
+python-dotenv
+python-socketio>=5.0
+websocket-client

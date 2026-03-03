@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+*.log
+__pycache__/
+*.pyc
+.seller.health
+.seller.pid
+seller-agent/logs/
+package-lock.json

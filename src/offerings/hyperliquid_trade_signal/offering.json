@@ -1,0 +1,34 @@
+{
+  "name": "hyperliquid_trade_signal",
+  "displayName": "Hyperliquid Trade Setup",
+  "description": "Returns a directional trade view for a single Hyperliquid perp. Output covers bias (LONG/SHORT/MIXED), suggested entry zone, stop-loss, take-profit targets, nearby liquidation clusters, and a short AI-written reasoning section grounded in local tracker data.",
+  "version": "1.0.0",
+  "price": "0.25",
+  "currency": "USDC",
+  "estimatedDuration": "60s",
+  "category": "trading",
+  "tags": ["hyperliquid", "trading", "signals", "perpetuals", "analysis"],
+  "requirements": {
+    "type": "object",
+    "properties": {
+      "symbol": {
+        "type": "string",
+        "description": "Trading symbol (e.g., BTC, ETH, SOL, DOGE)",
+        "examples": ["BTC", "ETH", "SOL", "DOGE", "AVAX"]
+      }
+    },
+    "required": ["symbol"]
+  },
+  "deliverables": {
+    "type": "object",
+    "properties": {
+      "type": { "type": "string" },
+      "value": { "type": "string", "description": "Full trade setup with direction, levels, and reasoning" }
+    }
+  },
+  "sla": {
+    "maxResponseTime": "90s",
+    "successRate": "90%",
+    "refundPolicy": "Full refund if setup not delivered within 90 seconds"
+  }
+}

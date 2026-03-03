@@ -1,0 +1,34 @@
+{
+  "name": "best_trade_signals",
+  "displayName": "Best Trade Signals",
+  "description": "Scans every monitored Hyperliquid perp and surfaces the strongest 1–2 opportunities. Candidates are scored by a composite of smart-money flow, positioning skew, proximity to liquidation pockets, and recent volatility. Each pick includes a complete setup with levels and reasoning.",
+  "version": "1.0.0",
+  "price": "0.25",
+  "currency": "USDC",
+  "estimatedDuration": "120s",
+  "category": "trading",
+  "tags": ["hyperliquid", "trading", "signals", "best-picks", "ai-ranked"],
+  "requirements": {
+    "type": "object",
+    "properties": {
+      "max_signals": {
+        "type": "number",
+        "description": "Maximum number of signals to return (1 or 2)",
+        "default": 2
+      }
+    },
+    "required": []
+  },
+  "deliverables": {
+    "type": "object",
+    "properties": {
+      "type": { "type": "string" },
+      "value": { "type": "string", "description": "Formatted trade signals with full setups" }
+    }
+  },
+  "sla": {
+    "maxResponseTime": "180s",
+    "successRate": "90%",
+    "refundPolicy": "Full refund if signals not delivered within 180 seconds"
+  }
+}

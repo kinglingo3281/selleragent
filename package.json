@@ -1,0 +1,26 @@
+{
+  "name": "acp-seller-agent",
+  "version": "1.0.0",
+  "description": "ACP Seller Agent for Hyperliquid Trade Signals",
+  "type": "module",
+  "scripts": {
+    "acp": "tsx bin/acp.ts",
+    "setup": "tsx bin/acp.ts setup",
+    "sell:list": "tsx bin/acp.ts sell list",
+    "sell:create": "tsx bin/acp.ts sell create",
+    "serve:start": "tsx bin/acp.ts serve start",
+    "serve:stop": "tsx bin/acp.ts serve stop",
+    "serve:status": "tsx bin/acp.ts serve status",
+    "serve:logs": "tsx bin/acp.ts serve logs"
+  },
+  "dependencies": {
+    "@virtuals-protocol/acp-node": "latest",
+    "commander": "^12.0.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
